@@ -1,25 +1,46 @@
 import mongoose from "mongoose";
 
-const patientSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
+const patientSchema=new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    age:{
-        type:Number
+    age: {
+      type: Number,
+      required: true,
     },
-    gender:{
-        type:String
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+      required: true,
     },
-    phone:{
-        type:String
+    phone: {
+      type: String,
+      required: true,
     },
-    address:{
-        type:String
+    email: {
+      type: String,
+      lowercase: true,
     },
-},{
-    timestamps:true
-});
+    address: {
+      type: String,
+    },
+    bloodGroup: {
+      type: String,
+    },
+    emergencyContact: {
+      name: String,
+      phone: String,
+    },
+    isAdmitted: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
 
 const Patient=mongoose.model("Patient",patientSchema);
 export default Patient;

@@ -1,24 +1,31 @@
 import mongoose from "mongoose";
-import Patient from "./Patient.model";
-
 const appointmentSchmea=new mongoose.Schema({
-    Patient:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Patient"
+    patient: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Patient",
+      required: true,
     },
-    doctor:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Doctor"
+    doctor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Doctor",
+      required: true,
     },
-    date:{
-        type:Date,
-        required:true
+    appointmentDate: {
+      type: Date,
+      required: true,
     },
-    status:{
-        type:String,
-        enum:['pending','confirmed','completed'],
-        default:'pending',
-    }
+    timeSlot: {
+      type: String, 
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "completed", "cancelled"],
+      default: "pending",
+    },
+    reason: {
+      type: String,
+    },
 },{timestamps:true});
 
 const Appointment=mongoose.model("Appointment",appointmentSchmea);
