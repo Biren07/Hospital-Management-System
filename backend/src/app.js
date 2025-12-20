@@ -4,12 +4,16 @@ import dotenv from "dotenv";
 import userRouter from './routes/User.route.js';
 import doctorRouter from './routes/Doctor.route.js';
 import patientRouter from './routes/Patient.route.js';
-import appointmentRouter from './routes/Appointment.route.js'
+import appointmentRouter from './routes/Appointment.route.js';
+import authRouter from './routes/Auth.routes.js';
+import notificationRouter from './routes/Notification.route.js';
 dotenv.config();
 const app= express();
 const PORT=process.env.PORT||3000;
 
 // Api call
+app.use('./api/notify',notificationRouter);
+app.use('./api/auth',authRouter);
 app.use('./api/appointment',appointmentRouter);
 app.use('./api/patients',patientRouter);
 app.use('/api/doctors',doctorRouter);
